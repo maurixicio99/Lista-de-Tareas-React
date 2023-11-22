@@ -3,44 +3,57 @@ import { FaEdit } from 'react-icons/fa';
 import { useForm } from '../hooks/useForm';
 
 export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
-	const { updateDescription, onInputChange } = useForm({
-		updateDescription: todo.description,
-	});
+  const { updateDescription, date, onInputChange } = useForm({
+    updateDescription: todo.description,
+    date: todo.date,
+  });
 
-	const [disabled, setDisabled] = useState(true);
-	const focusInputRef = useRef();
+  const [disabled, setDisabled] = useState(true);
+  const focusInputRef = useRef();
 
-	const onSubmitUpdate = e => {
-		e.preventDefault();
+  const onSubmitUpdate = (e) => {
+    e.preventDefault();
 
-		const id = todo.id;
-		const description = updateDescription;
+    const id = todo.id;
+    const description = updateDescription;
 
-		handleUpdateTodo(id, description);
+    handleUpdateTodo(id, description);
 
-		setDisabled(!disabled);
+    setDisabled(!disabled);
 
-		focusInputRef.current.focus();
-	};
+    focusInputRef.current.focus();
+  };
 
-	return (
-		<form onSubmit={onSubmitUpdate}>
-			<input
-				type='text'
-				className={`input-update ${
-					todo.done ? 'text-decoration-dashed' : ''
-				}`}
-				name='updateDescription'
-				value={updateDescription}
-				onChange={onInputChange}
-				placeholder='¿Qué hay que hacer?'
-				readOnly={disabled}
-				ref={focusInputRef}
-			/>
+  return (
+    <form onSubmit={onSubmitUpdate}>
+      <input
+        type='text'
+        className={`input-update ${
+          todo.done ? 'text-decoration-dashed' : ''
+        }`}
+        name='updateDescription'
+        value={updateDescription}
+        onChange={onInputChange}
+        placeholder='¿Qué hay que hacer?'
+        readOnly={disabled}
+        ref={focusInputRef}
+      />
 
-			<button className='btn-edit' type='submit'>
-				<FaEdit />
-			</button>
-		</form>
-	);
+      <input
+        type='date'
+        className={`input-update ${
+			todo.done ? 'text-decoration-dashed' : ''
+		  }`}
+        name='date'
+        value={date}
+        onChange={onInputChange}
+        placeholder='Fecha'
+        readOnly={disabled}
+      />
+
+      <button className='btn-edit' type='submit'>
+        <FaEdit />
+      </button>
+    </form>
+  );
 };
