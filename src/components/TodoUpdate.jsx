@@ -41,9 +41,7 @@ export const TodoUpdate = ({ todo, handleUpdateTodo }) => {
 
       <input
         type='date'
-        className={`input-update ${
-			todo.done ? 'text-decoration-dashed' : ''
-		  }`}
+        className='input-update-date'
         name='date'
         value={date}
         onChange={onInputChange}
