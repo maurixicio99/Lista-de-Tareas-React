@@ -35,7 +35,7 @@ export const TodoAdd = ({ handleNewTodo }) => {
       />
       <input
         type='date'
-        className='input-add'
+        className='input-add-date'
         name='date'
         value={date}
         onChange={onInputChange}
